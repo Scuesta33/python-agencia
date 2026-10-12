@@ -16,13 +16,17 @@ pedidos = [
 # ==========================================
 
 def validar_pedido(pedido):
-    cliente = pedido["cliente"]
-    cantidad = pedido["cantidad"]
-    precio = pedido["precio"]
+    cliente = pedido.get("cliente", "")
+    cantidad = pedido.get("cantidad", 0)
+    precio = pedido.get("precio", 0)
+
+    if type(cantidad) not in (int, float):
+        return False
+
+    if type(precio) not in (int, float):
+        return False
 
     return cantidad > 0 and cliente != "" and precio > 0
-
-
 # ==========================================
 # 3. CLASIFICAR PEDIDOS
 # ==========================================
@@ -56,7 +60,6 @@ def calcular_facturacion(lista_pedidos):
 
     return total
 
-
 # ==========================================
 # 5. FUNCIÓN PRINCIPAL
 # ==========================================
@@ -80,3 +83,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
